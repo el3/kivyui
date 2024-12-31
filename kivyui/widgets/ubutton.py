@@ -1,10 +1,9 @@
 from kivy.lang import Builder
-from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
-from behaviors import HoverBehavior
+from kivyui.behaviors import HoverBehavior
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import AliasProperty, StringProperty, ListProperty
-from data.colors import colors
+from kivyui.data.colors import colors
 from kivy.core.window import Window
 
 KV = """
@@ -32,7 +31,7 @@ KV = """
             Rectangle:
                 pos: self.x, self.center_y-sp(root.font_size[:-2])/2
                 size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
-                source: f'data/icons/{root.icon}'
+                source: f'kivyui/data/icons/{root.icon}'
     Label:
         text: root.text
         color: root.font_color

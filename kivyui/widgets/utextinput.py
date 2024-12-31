@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import AliasProperty, StringProperty, ListProperty
-from data.colors import colors
+from kivyui.data.colors import colors
 
 KV = """
 <UTextInput>:
@@ -27,7 +27,7 @@ KV = """
                 Rectangle:
                     pos: self.pos
                     size: self.size
-                    source: f'data/icons/{root.icon}'
+                    source: f'kivyui/data/icons/{root.icon}'
                 
         TextInput:
             size_hint_y: None

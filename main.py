@@ -1,8 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
-import data
-import behaviors
-import widgets
+from kivyui.widgets import UButton
+
 
 KV = """
 BoxLayout:

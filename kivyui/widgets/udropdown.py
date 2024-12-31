@@ -1,14 +1,13 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.label import Label
-from kivy.uix.modalview import ModalView
 from kivy.uix.behaviors import ButtonBehavior
-from widgets.ubutton import UButton
-from kivy.properties import AliasProperty, StringProperty, NumericProperty
-from data.colors import colors
+from kivy.properties import StringProperty, NumericProperty
 from kivy.clock import Clock
+
+from kivyui.data.colors import colors
+from kivyui.widgets.ubutton import UButton
 
 KV = """
 <UDropDown>:
