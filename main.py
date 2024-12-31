@@ -12,7 +12,7 @@ BoxLayout:
         spacing: 10
         UDropDown:
         UButton:
-            ucolor: 'stone'
+            color: 'stone'
             variant: 'outline'
             text: 'Button'
     BoxLayout:
@@ -27,58 +27,58 @@ BoxLayout:
     BoxLayout:
         spacing: 10
         UButton:
-            ucolor: 'orange'
+            color: 'orange'
             text: 'Button'
         UButton:
-            ucolor: 'orange'
+            color: 'orange'
             variant: 'outline'
             text: 'Button'
     BoxLayout:
         spacing: 10
         UButton:
-            ucolor: 'orange'
+            color: 'orange'
             variant: 'outline'
             text: 'More Button'
             on_release:
                 self.text = 'pushed'
         UButton:
-            ucolor: 'orange'
+            color: 'orange'
             text: 'More Button'
     BoxLayout:
         spacing: 10
         UButton:
-            ucolor: 'stone'
+            color: 'stone'
             text: 'Button'
         UButton:
-            ucolor: 'stone'
+            color: 'stone'
             variant: 'outline'
             text: 'Button'
     BoxLayout:
         spacing: 10
         UButton:
-            ucolor: 'stone'
+            color: 'stone'
             variant: 'outline'
             text: 'More Button'
             on_release:
                 self.text = 'pushed'
         UButton:
-            ucolor: 'stone'
+            color: 'stone'
             text: 'More Button'
     BoxLayout:
         spacing: 10
         UTextInput:
-            ucolor: 'red'
+            color: 'red'
             text: 'More TextInput'
         UTextInput:
-            ucolor: 'sky'
+            color: 'sky'
             text: 'More textinput'
     BoxLayout:
         spacing: 10
         UTextInput:
-            ucolor: 'green'
+            color: 'green'
             text: 'More TextInput'
         UTextInput:
-            ucolor: 'indigo'
+            color: 'indigo'
             text: 'More textinput'
   
 """

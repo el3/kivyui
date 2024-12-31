@@ -27,7 +27,7 @@ KV = """
                 Rectangle:
                     pos: self.pos
                     size: self.size
-                    source: f'kivyui/data/icons/{root.icon}'
+                    source: root._icon
                 
         TextInput:
             size_hint_y: None
@@ -45,20 +45,24 @@ KV = """
 
 
 class UTextInput(BoxLayout):
-    ucolor = StringProperty('green')
+    color = StringProperty('green')
     text = StringProperty('')
     icon = StringProperty('material-symbols--search-rounded.png')
     icon_color = ListProperty([0.5803921568627451, 0.6392156862745098, 0.7215686274509804, 1.0])
     hint_text = StringProperty('Search...')
 
+    def _get_icon(self):
+        return f'kivyui/data/icons/{self.icon}'
+
+    _icon = AliasProperty(_get_icon, None, bind=['icon'])
 
     def _get_outline_color(self):
-        return colors.get(self.ucolor).get('fill')
+        return colors.get(self.color).get('fill')
 
-    outline_color = AliasProperty(_get_outline_color, None, bind=['ucolor'])
+    outline_color = AliasProperty(_get_outline_color, None, bind=['color'])
 
     def _get_outline_color(self):
-        return colors.get(self.ucolor).get('fill')
+        return colors.get(self.color).get('fill')
 
 
 Builder.load_string(KV)

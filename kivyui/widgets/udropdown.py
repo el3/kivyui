@@ -17,7 +17,7 @@ KV = """
         pos: root.pos
         size_hint: None, None
         size: root.size
-        ucolor: 'stone'
+        color: 'stone'
         variant: 'outline'
         on_release:
             root.open_dropdown()

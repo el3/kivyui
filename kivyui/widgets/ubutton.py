@@ -31,7 +31,7 @@ KV = """
             Rectangle:
                 pos: self.x, self.center_y-sp(root.font_size[:-2])/2
                 size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
-                source: f'kivyui/data/icons/{root.icon}'
+                source: root._icon
     Label:
         text: root.text
         color: root.font_color
@@ -42,18 +42,23 @@ KV = """
 class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
     font_size = StringProperty("20sp")
     text = StringProperty('')
-    ucolor = StringProperty('green')
+    color = StringProperty('green')
     variant = StringProperty('solid')
     icon = StringProperty('material-symbols--search-rounded.png')
     icon_color = ListProperty([0.5803921568627451, 0.6392156862745098, 0.7215686274509804, 1.0])
 
+    def _get_icon(self):
+        return f'kivyui/data/icons/{self.icon}'
+
+    _icon = AliasProperty(_get_icon, None, bind=['icon'])
+
     def _get_font_color(self):
         if self.variant == 'solid':
-            return colors.get(self.ucolor).get('font')
+            return colors.get(self.color).get('font')
         else:
-            return colors.get(self.ucolor).get('fill')
+            return colors.get(self.color).get('fill')
 
-    font_color = AliasProperty(_get_font_color, None, bind=['ucolor','hovered','variant'])
+    font_color = AliasProperty(_get_font_color, None, bind=['color','hovered','variant'])
 
     def _get_fill_color(self):
         if self.hovered:
@@ -66,17 +71,17 @@ class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
                 return [0,0,0,0]
             else:
                 fill = 'fill'
-        return colors.get(self.ucolor).get(fill)
+        return colors.get(self.color).get(fill)
 
-    fill_color = AliasProperty(_get_fill_color, None, bind=['ucolor','hovered','variant'])
+    fill_color = AliasProperty(_get_fill_color, None, bind=['color','hovered','variant'])
 
     def _get_outline_color(self):
         if self.variant == 'outline':
-            return colors.get(self.ucolor).get('fill')
+            return colors.get(self.color).get('fill')
         else:
             return [0,0,0,0]
 
-    outline_color = AliasProperty(_get_outline_color, None, bind=['ucolor'])
+    outline_color = AliasProperty(_get_outline_color, None, bind=['color'])
 
     def on_enter(self, *args):
         Window.set_system_cursor('hand')
