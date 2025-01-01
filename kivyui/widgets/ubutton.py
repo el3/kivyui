@@ -27,7 +27,7 @@ KV = """
         width: self.height if root.icon != '' else 0
         canvas:
             Color:
-                rgba: root.icon_color
+                rgba: root._icon_color
             Rectangle:
                 pos: self.x, self.center_y-sp(root.font_size[:-2])/2
                 size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
@@ -44,13 +44,24 @@ class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
     text = StringProperty('')
     color = StringProperty('green')
     variant = StringProperty('solid')
-    icon = StringProperty('material-symbols--search-rounded.png')
+    icon = StringProperty('')
     icon_color = ListProperty([0.5803921568627451, 0.6392156862745098, 0.7215686274509804, 1.0])
 
     def _get_icon(self):
-        return f'kivyui/data/icons/{self.icon}'
+        if self.icon != "":
+            return f'kivyui/data/icons/{self.icon}'
+        else:
+            return ""
 
     _icon = AliasProperty(_get_icon, None, bind=['icon'])
+
+    def _get_icon_color(self):
+        if self.icon != "":
+            return self.icon_color
+        else:
+            return [0,0,0,0]
+
+    _icon_color = AliasProperty(_get_icon_color, None, bind=['icon_color'])
 
     def _get_font_color(self):
         if self.variant == 'solid':
