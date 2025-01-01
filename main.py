@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.lang import Builder
-from kivyui.widgets import UButton
+import kivyui.widgets
 
 
 KV = """
@@ -18,12 +18,12 @@ BoxLayout:
     BoxLayout:
         spacing: 10
         UButton:
+            icon: 'material-symbols--search-rounded.png'
             variant: 'outline'
             text: 'More Button'
             on_release:
                 self.text = 'pushed'
-        UButton:
-            text: 'More Button'
+        DatePicker:
     BoxLayout:
         spacing: 10
         UButton:

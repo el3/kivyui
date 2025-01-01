@@ -2,7 +2,7 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivyui.behaviors import HoverBehavior
 from kivy.uix.behaviors import ButtonBehavior
-from kivy.properties import AliasProperty, StringProperty, ListProperty
+from kivy.properties import AliasProperty, StringProperty, ListProperty, BooleanProperty
 from kivyui.data.colors import colors
 from kivy.core.window import Window
 
@@ -10,18 +10,18 @@ KV = """
 #:import sp kivy.metrics.sp
 
 <UButton>:
-    padding: [10,0,0,0]
+    padding: [0,0,0,0] if self.icon == '' else [10,0,0,0]
     canvas.before:
         Color:
             rgba: self.fill_color
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [(10.0, 10.0), (10.0, 10.0), (10.0, 10.0), (10.0, 10.0)]
+            radius: [10] if not self.rounded else [self.height/2]
         Color:
             rgba: self.outline_color
         Line:
-            rounded_rectangle: (self.x, self.y, self.width, self.height, 10, 10, 10, 10, 100)
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10 if not self.rounded else self.height/2, 100)
     Widget:
         size_hint_x: None
         width: self.height if root.icon != '' else 0
@@ -40,6 +40,7 @@ KV = """
 
 
 class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
+    rounded = BooleanProperty(False)
     font_size = StringProperty("20sp")
     text = StringProperty('')
     color = StringProperty('green')
@@ -61,7 +62,7 @@ class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
         else:
             return [0,0,0,0]
 
-    _icon_color = AliasProperty(_get_icon_color, None, bind=['icon_color'])
+    _icon_color = AliasProperty(_get_icon_color, None, bind=['icon_color','icon'])
 
     def _get_font_color(self):
         if self.variant == 'solid':

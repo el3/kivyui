@@ -72,7 +72,9 @@ class UDropDown(UButton):
             for widget in section:
                 bl.add_widget(UDropDownLabel(text=widget.get('label')))
             self.dropdown.add_widget(bl)
-        self.bind(on_release=self.dropdown.open)
+
+    def on_release(self):
+        self.dropdown.open(self)
 
 
 class UBoxLayout(BoxLayout):
