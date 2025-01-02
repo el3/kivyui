@@ -8,7 +8,7 @@ from kivyui.widgets.ubutton import UButton
 
 KV = """
 <UDropDown>:
-    icon: 'material-symbols--keyboard-arrow-down.png'
+    left_icon: 'material-symbols--keyboard-arrow-down.png'
     text: root.text
     color: 'stone'
     variant: 'outline'
@@ -31,7 +31,6 @@ KV = """
             size: self.size
             pos: self.pos
             radius: [(10.0, 10.0), (10.0, 10.0), (10.0, 10.0), (10.0, 10.0)]
-
         Color:
             rgba: .7,.7,.7,1
         Line:

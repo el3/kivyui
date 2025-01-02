@@ -10,7 +10,7 @@ KV = """
 #:import sp kivy.metrics.sp
 
 <UButton>:
-    padding: [0,0,0,0] if self.icon == '' else [10,0,0,0]
+    padding: [0,0,0,0] if '' in [self.left_icon, self.text] else [10,0,0,0]
     canvas.before:
         Color:
             rgba: self.fill_color
@@ -24,18 +24,30 @@ KV = """
             rounded_rectangle: (self.x, self.y, self.width, self.height, 10 if not self.rounded else self.height/2, 100)
     Widget:
         size_hint_x: None
-        width: self.height if root.icon != '' else 0
+        width: 0 if all([root.right_icon == '', root.left_icon == '']) else self.height
         canvas:
             Color:
-                rgba: root._icon_color
+                rgb: root.font_color[:3]
+                a: 0 if root.left_icon == '' else 1
             Rectangle:
                 pos: self.x, self.center_y-sp(root.font_size[:-2])/2
                 size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
-                source: root._icon
+                source: root._left_icon
     Label:
         text: root.text
         color: root.font_color
         font_size: root.font_size
+    Widget:
+        size_hint_x: None
+        width: 0 if all([root.right_icon == '', root.left_icon == '']) else self.height
+        canvas:
+            Color:
+                rgb: root.font_color[:3]
+                a: 0 if root.right_icon == '' else 1
+            Rectangle:
+                pos: self.x, self.center_y-sp(root.font_size[:-2])/2
+                size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
+                source: root._right_icon
 """
 
 
@@ -45,24 +57,25 @@ class UButton(HoverBehavior,ButtonBehavior,BoxLayout):
     text = StringProperty('')
     color = StringProperty('green')
     variant = StringProperty('solid')
-    icon = StringProperty('')
-    icon_color = ListProperty([0.5803921568627451, 0.6392156862745098, 0.7215686274509804, 1.0])
+    left_icon = StringProperty('')
+    right_icon = StringProperty('')
 
-    def _get_icon(self):
-        if self.icon != "":
-            return f'kivyui/data/icons/{self.icon}'
+    def _get_left_icon(self):
+        if self.left_icon != "":
+            return f'kivyui/data/icons/{self.left_icon}'
         else:
             return ""
 
-    _icon = AliasProperty(_get_icon, None, bind=['icon'])
+    _left_icon = AliasProperty(_get_left_icon, None, bind=['left_icon'])
 
-    def _get_icon_color(self):
-        if self.icon != "":
-            return self.icon_color
+
+    def _get_right_icon(self):
+        if self.right_icon != "":
+            return f'kivyui/data/icons/{self.right_icon}'
         else:
-            return [0,0,0,0]
+            return ""
 
-    _icon_color = AliasProperty(_get_icon_color, None, bind=['icon_color','icon'])
+    _right_icon = AliasProperty(_get_right_icon, None, bind=['right_icon'])
 
     def _get_font_color(self):
         if self.variant == 'solid':

@@ -14,11 +14,12 @@ BoxLayout:
         UButton:
             color: 'stone'
             variant: 'outline'
-            text: 'Button'
+            text: 'Save'
+            right_icon: 'material-symbols--save-as-outline-rounded.png'
     BoxLayout:
         spacing: 10
         UButton:
-            icon: 'material-symbols--search-rounded.png'
+            left_icon: 'material-symbols--search-rounded.png'
             variant: 'outline'
             text: 'More Button'
             on_release:
@@ -27,8 +28,9 @@ BoxLayout:
     BoxLayout:
         spacing: 10
         UButton:
-            color: 'orange'
+            color: 'purple'
             text: 'Button'
+            right_icon: 'material-symbols--person-edit-outline.png'
         UButton:
             color: 'orange'
             variant: 'outline'
@@ -56,8 +58,8 @@ BoxLayout:
     BoxLayout:
         spacing: 10
         UButton:
-            color: 'stone'
-            variant: 'outline'
+            color: 'indigo'
+            variant: 'solid'
             text: 'More Button'
             on_release:
                 self.text = 'pushed'
