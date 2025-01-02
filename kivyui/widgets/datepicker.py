@@ -15,6 +15,7 @@ from functools import partial
 KV = """
 #:import rgba kivy.utils.rgba
 <NavBar>:
+    spacing: 30
     padding: [10,10,10,10]
     size_hint_y: None
     height: 44
@@ -24,6 +25,8 @@ KV = """
         icon: 'material-symbols--arrow-back-ios-new-rounded.png'
         size_hint_x: None
         width: self.height
+        on_release:
+            root.change_month(-1)
     UButton:
         color: 'sky'
         variant: 'ghost'
@@ -35,7 +38,7 @@ KV = """
         size_hint_x: None
         width: self.height
         on_release:
-            root.change_month()
+            root.change_month(1)
 
 <WeekDayNames>:
     padding: [10,0,10,0]
@@ -96,22 +99,22 @@ class NavBar(BoxLayout):
     month_object = ObjectProperty(None)
     _date_string = StringProperty("")
 
-    #def _set_date_string
-
-    def change_month(self):
+    def change_month(self, add_month=1):
         dt = datetime.fromtimestamp(self.month_object._timestamp)
-        dt = dt + relativedelta(months=1)
+        dt = dt + relativedelta(months=add_month)
         dt = int(dt.timestamp())
         self.month_object.set_month(dt)
-        self._date_string = datetime.fromtimestamp(dt).strftime("%b %Y")
+        self._date_string = datetime.fromtimestamp(dt).strftime("%B %Y")
+
 
 class Day(BoxLayout):
     text = StringProperty("")
     year = NumericProperty(0)
     month = NumericProperty(0)
+    month_object = ObjectProperty(None)
 
     def select_date(self, day_button):
-        self.parent.parent.select_date(day_button)
+        self.month_object.select_date(day_button)
 
 
 class EmptyDay(Widget):
@@ -132,7 +135,6 @@ class Month(BoxLayout):
         Clock.schedule_once(partial(self.set_month,timestamp))
 
     def set_month(self,timestamp, dt=0):
-        # for i in c.itermonthdays4(2025,1): print(i)
         self._timestamp = timestamp
         date = datetime.fromtimestamp(timestamp)
         cal = self.calendar.monthdatescalendar(date.year, date.month)
@@ -141,7 +143,7 @@ class Month(BoxLayout):
             bl = Week()
             for d in w:
                 if d.month == date.month:
-                    bl.add_widget(Day(text=f"{d.day}", year=d.year, month=d.month))
+                    bl.add_widget(Day(text=f"{d.day}", year=d.year, month=d.month, month_object=self))
                 else:
                     bl.add_widget(Widget())
             self.add_widget(bl)
@@ -152,6 +154,7 @@ class Month(BoxLayout):
                 if isinstance(d, Day):
                     d.selected = False
         self.datepicker._set_date(day_button.year, day_button.month, int(day_button.text))
+
 
 class DatePickerDropDown(DropDown):
     pass
@@ -166,7 +169,12 @@ class WeekDayNames(BoxLayout):
 
 class DatePicker(UButton):
     week_day_names = ListProperty(['M','T','W','T','F','S','S'])
+    _selected_timestamp = NumericProperty(datetime.now().timestamp())
 
+    def get_selected_date(self):
+        return datetime.fromtimestamp(self._selected_timestamp)
+
+    selected_date = AliasProperty(get_selected_date,None,bind=['_selected_timestamp'])
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dropdown = DatePickerDropDown()
@@ -180,7 +188,8 @@ class DatePicker(UButton):
 
     def _set_text(self, timestamp):
         self.text = datetime.fromtimestamp(timestamp).strftime("%-d %b, %Y")
-        self.navbar._date_string = datetime.fromtimestamp(timestamp).strftime("%b %Y")
+        self._selected_timestamp = timestamp
+        self.navbar._date_string = datetime.fromtimestamp(timestamp).strftime("%B %Y")
 
     def _set_date(self, year, month, day):
         timestamp = datetime(year, month, day).timestamp()
