@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 import kivyui.widgets
-
+from kivyui.widgets import UDropDown
 
 KV = """
 BoxLayout:
@@ -10,7 +10,8 @@ BoxLayout:
     spacing: 10
     BoxLayout:
         spacing: 10
-        UDropDown:
+        MyDropDown:
+            items: self.myitems
         UButton:
             color: 'stone'
             variant: 'outline'
@@ -82,8 +83,20 @@ BoxLayout:
         UTextInput:
             color: 'indigo'
             text: 'More textinput'
-  
 """
+
+
+class MyDropDown(UDropDown):
+    def profile(self):
+        print("Profile")
+
+    def edit(self):
+        print("Edit")
+
+    myitems = [ [{'label': 'Profile', 'on_release':profile}],
+                [{'label': 'Edit', 'on_press':edit}, {'label': 'Duplicate'}],
+                [{'label': 'Archive'}, {'label': 'Move'}],
+                [{'label': 'Delete'}]]
 
 
 class MyApp(App):

@@ -3,7 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.dropdown import DropDown
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
-from kivy.properties import StringProperty, NumericProperty
+from kivy.properties import StringProperty, NumericProperty, ListProperty
 from kivyui.widgets.ubutton import UButton
 
 KV = """
@@ -15,11 +15,10 @@ KV = """
 
 
 <UBoxLayout>:
-    a: 1
     orientation: 'vertical'
     canvas.before:
         Color:
-            rgba: .7,.7,.7,self.a
+            rgba: .7,.7,.7,1
         Line:
             points: self.x+10, self.y, self.x+self.width-10, self.y   
 
@@ -55,21 +54,23 @@ class UDropDownWidget(DropDown):
     pass
 class UDropDown(UButton):
     text = StringProperty('Options')
-    items = [   [{'label': 'Profile'}],
-                [{'label': 'Edit','click': {}},
-                {'label': 'Duplicate'}],
-                [{'label': 'Archive'},
-                {'label': 'Move'}],
-                [{'label': 'Delete'}]]
+    items = ListProperty([])
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dropdown = UDropDownWidget()
+
+    def on_items(self, *args):
         for section in self.items:
             bl = UBoxLayout(size_hint_y=None)
             bl.bind(minimum_height=bl.setter('height'))
             for widget in section:
-                bl.add_widget(UDropDownLabel(text=widget.get('label')))
+                label = UDropDownLabel(text=widget.get('label'))
+                if widget.get('on_release'):
+                    label.bind(on_release=widget.get('on_release'))
+                if widget.get('on_press'):
+                    label.bind(on_press=widget.get('on_press'))
+                bl.add_widget(label)
             self.dropdown.add_widget(bl)
 
     def on_release(self):
@@ -77,7 +78,7 @@ class UDropDown(UButton):
 
 
 class UBoxLayout(BoxLayout):
-    a = NumericProperty(1)
+    pass
 
 
 
