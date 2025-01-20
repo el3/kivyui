@@ -1,3 +1,9 @@
+import os
+from calendar import Calendar
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from functools import partial
+
 from kivy.lang import Builder
 from kivy.uix.dropdown import DropDown
 from kivy.uix.boxlayout import BoxLayout
@@ -5,98 +11,18 @@ from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty, ListProperty, NumericProperty, AliasProperty, ObjectProperty
 from kivy.clock import Clock
-from kivyui.widgets import UButton
-from calendar import Calendar
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from functools import partial
+
+from kivyui.ui import UButton
+from kivyui.config import UI
 
 
-KV = """
-#:import rgba kivy.utils.rgba
-<NavBar>:
-    spacing: 30
-    padding: [10,10,10,10]
-    size_hint_y: None
-    height: 44
-    UButton:
-        color: 'sky'
-        variant: 'ghost'
-        icon: 'material-symbols--arrow-back-ios-new-rounded.png'
-        size_hint_x: None
-        width: self.height
-        on_release:
-            root.change_month(-1)
-    UButton:
-        color: 'sky'
-        variant: 'ghost'
-        text: root._date_string
-    UButton:
-        color: 'sky'
-        variant: 'ghost'
-        icon: 'material-symbols--arrow-forward-ios-rounded.png'
-        size_hint_x: None
-        width: self.height
-        on_release:
-            root.change_month(1)
-
-<WeekDayNames>:
-    padding: [10,0,10,0]
-    size_hint_y: None
-    height: 44
-    
-<DatePicker>:
-    icon: 'material-symbols--calendar-month-rounded.png'
-    icon_color: [0,0,0,1]
-
-<Month>:
-    spacing: 10
-    orientation: 'vertical'
-    size_hint_y: None
-    height: 44*6
-    padding: [10,0,10,10]
-    
-<Week>:
-    size_hint_y: None
-    height: 36
-
-<Day>:
-    selected: False
-    text: ''
-    Widget:
-    UButton:
-        color: 'sky' if not root.selected else 'green'
-        rounded: True
-        text: root.text
-        size_hint_x: None
-        width: self.height
-        id: day
-        on_release:
-            root.select_date(root)
-            root.selected = True
-    Widget:
-
-
-<DatePickerDropDown>:
-    canvas.before:
-        Color:
-            rgba: rgba('#0f172a')
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [10]
-        Color:
-            rgba: .5,.5,.5,1
-        Line:
-            rounded_rectangle: (self.x, self.y, self.width, self.height, 10, 10, 10, 10, 100)
-    size_hint_x: None
-    width: self.height/8*7
-    auto_width: False
-"""
+Builder.load_file(os.path.join(UI, "datepicker", "datepicker.kv"))
 
 
 class NavBar(BoxLayout):
+
     month_object = ObjectProperty(None)
+
     _date_string = StringProperty("")
 
     def change_month(self, add_month=1):
@@ -187,7 +113,7 @@ class DatePicker(UButton):
         self.dropdown.add_widget(self.month)
 
     def _set_text(self, timestamp):
-        self.text = datetime.fromtimestamp(timestamp).strftime("%-d %b, %Y")
+        self.text = datetime.fromtimestamp(timestamp).strftime("%d %b ,%Y")
         self._selected_timestamp = timestamp
         self.navbar._date_string = datetime.fromtimestamp(timestamp).strftime("%B %Y")
 
@@ -197,6 +123,3 @@ class DatePicker(UButton):
 
     def on_release(self):
         self.dropdown.open(self)
-
-
-Builder.load_string(KV)

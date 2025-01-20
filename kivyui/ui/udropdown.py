@@ -4,7 +4,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import StringProperty, NumericProperty, ListProperty
-from kivyui.widgets.ubutton import UButton
+from kivyui.ui.ubutton import UButton
 
 KV = """
 <UDropDown>:

@@ -1,0 +1,83 @@
+#:import rgba kivy.utils.rgba
+
+<NavBar>:
+    spacing: 30
+    padding: [10,10,10,10]
+    size_hint_y: None
+    height: 44
+
+    UButton:
+        color: 'sky'
+        variant: 'ghost'
+        icon: 'material-symbols--arrow-back-ios-new-rounded.png'
+        size_hint_x: None
+        width: self.height
+        on_release:
+            root.change_month(-1)
+
+    UButton:
+        color: 'sky'
+        variant: 'ghost'
+        text: root._date_string
+
+    UButton:
+        color: 'sky'
+        variant: 'ghost'
+        icon: 'material-symbols--arrow-forward-ios-rounded.png'
+        size_hint_x: None
+        width: self.height
+        on_release:
+            root.change_month(1)
+
+<WeekDayNames>:
+    padding: [10,0,10,0]
+    size_hint_y: None
+    height: 44
+    
+<DatePicker>:
+    icon: 'material-symbols--calendar-month-rounded.png'
+    icon_color: [0,0,0,1]
+
+<Month>:
+    spacing: 10
+    orientation: 'vertical'
+    size_hint_y: None
+    height: 44*6
+    padding: [10,0,10,10]
+    
+<Week>:
+    size_hint_y: None
+    height: 36
+
+<Day>:
+    selected: False
+    text: ''
+    Widget:
+    UButton:
+        color: 'sky' if not root.selected else 'green'
+        rounded: True
+        text: root.text
+        size_hint_x: None
+        width: self.height
+        id: day
+        on_release:
+            root.select_date(root)
+            root.selected = True
+    Widget:
+
+
+<DatePickerDropDown>:
+    canvas.before:
+        Color:
+            rgba: rgba('#0f172a')
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [10]
+        Color:
+            rgba: .5,.5,.5,1
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10, 10, 10, 10, 100)
+    size_hint_x: None
+    width: self.height/8*7
+    auto_width: False
