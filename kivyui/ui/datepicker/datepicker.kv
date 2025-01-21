@@ -6,7 +6,7 @@
     size_hint_y: None
     height: 44
 
-    UButton:
+    UIButton:
         color: 'sky'
         variant: 'ghost'
         icon: 'material-symbols--arrow-back-ios-new-rounded.png'
@@ -15,12 +15,12 @@
         on_release:
             root.change_month(-1)
 
-    UButton:
+    UIButton:
         color: 'sky'
         variant: 'ghost'
         text: root._date_string
 
-    UButton:
+    UIButton:
         color: 'sky'
         variant: 'ghost'
         icon: 'material-symbols--arrow-forward-ios-rounded.png'
@@ -34,7 +34,7 @@
     size_hint_y: None
     height: 44
     
-<DatePicker>:
+<UIDatePicker>:
     icon: 'material-symbols--calendar-month-rounded.png'
     icon_color: [0,0,0,1]
 
@@ -53,7 +53,7 @@
     selected: False
     text: ''
     Widget:
-    UButton:
+    UIButton:
         color: 'sky' if not root.selected else 'green'
         rounded: True
         text: root.text
@@ -66,7 +66,7 @@
     Widget:
 
 
-<DatePickerDropDown>:
+<UIDatePickerDropDown>:
     canvas.before:
         Color:
             rgba: rgba('#0f172a')

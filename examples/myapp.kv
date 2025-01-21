@@ -1,0 +1,80 @@
+HomeScreen:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 10
+        BoxLayout:
+            spacing: 10
+            MyDropDown:
+                items: self.myitems
+            UIButton:
+                color: 'stone'
+                variant: 'outline'
+                text: 'Save'
+                right_icon: 'material-symbols--save-as-outline-rounded.png'
+        BoxLayout:
+            spacing: 10
+            UIButton:
+                left_icon: 'material-symbols--search-rounded.png'
+                variant: 'outline'
+                text: 'More Button'
+                on_release:
+                    self.text = 'pushed'
+            UIDatePicker:
+        BoxLayout:
+            spacing: 10
+            UIButton:
+                color: 'purple'
+                text: 'Button'
+                right_icon: 'material-symbols--person-edit-outline.png'
+            UIButton:
+                color: 'orange'
+                variant: 'outline'
+                text: 'Button'
+        BoxLayout:
+            spacing: 10
+            UIButton:
+                color: 'orange'
+                variant: 'outline'
+                text: 'More Button'
+                on_release:
+                    self.text = 'pushed'
+            UIButton:
+                color: 'orange'
+                text: 'More Button'
+        BoxLayout:
+            spacing: 10
+            UIButton:
+                color: 'stone'
+                text: 'Button'
+            UIButton:
+                color: 'stone'
+                variant: 'outline'
+                text: 'Button'
+        BoxLayout:
+            spacing: 10
+            UIButton:
+                color: 'indigo'
+                variant: 'solid'
+                text: 'More Button'
+                on_release:
+                    self.text = 'pushed'
+            UIButton:
+                color: 'stone'
+                text: 'More Button'
+        BoxLayout:
+            spacing: 10
+            UITextInput:
+                color: 'red'
+                text: 'More TextInput'
+            UITextInput:
+                color: 'sky'
+                text: 'More textinput'
+        BoxLayout:
+            spacing: 10
+            UITextInput:
+                color: 'green'
+                text: 'More TextInput'
+            UITextInput:
+                color: 'indigo'
+                text: 'More textinput'

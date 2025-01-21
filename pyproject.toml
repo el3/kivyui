@@ -24,9 +24,10 @@ keywords = ["kivy", "open source", "nuxtui", "kivyui", "kv"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
-  "Topic :: Software Development :: Build Tools",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Multimedia :: Graphics",
   "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3"
+  "Programming Language :: Python :: 3",
 ]
 
 [project.urls]
@@ -38,12 +39,8 @@ Changelog = "https://github.com/el3/KivyUI/blob/main/CHANGELOG.md"
 [tool.setuptools.dynamic]
 version = {attr = "kivyui.__version__"}
 
-[project.optional-dependencies]
-all = [
-  "markdown2",
-  "pyqt5",
-  "pyqtwebengine",
-]
+[tool.setuptools]
+packages = ["kivyui"]
 
 [tool.setuptools.package-data]
 "kivyui" = [
