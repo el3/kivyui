@@ -10,7 +10,7 @@
 [![GitHub repo size](https://img.shields.io/github/repo-size/el3/KivyUI?color=red&logo=github&logoColor=white)](https://github.com/el3/KivyUI)
 [![GitHub issues](https://img.shields.io/github/issues/el3/KivyUI?color=blueviolet&logo=github&logoColor=white)](https://github.com/el3/KivyUI/issues)
 
-<img src="https://raw.githubusercontent.com/el3/KivyUI/main/assets/kivyui_logo256.png" height="178" align="right" padding="11"/>
+<img src="https://raw.githubusercontent.com/el3/KivyUI/main/assets/kivyui_logo256.png" height="178" align="right" style="border-radius:50%;" padding="11"/>
 
 <p>KivyUI is a powerful library that brings the simplicity and flexibility of Nuxt-inspired UI components to the Kivy framework. With KivyUI, developers can easily create visually appealing and responsive applications using a collection of prebuilt, reusable components tailored for Kivy.
 
