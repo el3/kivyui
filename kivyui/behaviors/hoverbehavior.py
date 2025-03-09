@@ -14,13 +14,13 @@ class HoverBehavior(object):
 
     hovered = BooleanProperty(False)
     border_point = ObjectProperty(None)
-    '''Contains the last relevant point received by the Hoverable. This can
+    """Contains the last relevant point received by the Hoverable. This can
     be used in `on_enter` or `on_leave` in order to know where was dispatched the event.
-    '''
+    """
 
     def __init__(self, **kwargs):
-        self.register_event_type('on_enter')
-        self.register_event_type('on_leave')
+        self.register_event_type("on_enter")
+        self.register_event_type("on_leave")
         Window.bind(mouse_pos=self.on_mouse_pos)
         super().__init__(**kwargs)
 
@@ -36,9 +36,9 @@ class HoverBehavior(object):
         self.border_point = pos
         self.hovered = inside
         if inside:
-            self.dispatch('on_enter')
+            self.dispatch("on_enter")
         else:
-            self.dispatch('on_leave')
+            self.dispatch("on_leave")
 
     def on_enter(self):
         pass
@@ -47,4 +47,4 @@ class HoverBehavior(object):
         pass
 
 
-Factory.register('HoverBehavior', HoverBehavior)
+Factory.register("HoverBehavior", HoverBehavior)

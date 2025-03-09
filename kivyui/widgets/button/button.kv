@@ -1,0 +1,39 @@
+<UButton>:
+    padding: [0,0,0,0] if '' in [self.left_icon, self.text] else [10,0,0,0]
+    canvas.before:
+        Color:
+            rgba: self.fill_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [10] if not self.rounded else [self.height/2]
+        Color:
+            rgba: self.outline_color
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10 if not self.rounded else self.height/2, 100)
+    Widget:
+        size_hint_x: None
+        width: 0 if all([root.right_icon == '', root.left_icon == '']) else self.height
+        canvas:
+            Color:
+                rgb: root.font_color[:3]
+                a: 0 if root.left_icon == '' else 1
+            Rectangle:
+                pos: self.x, self.center_y-sp(root.font_size[:-2])/2
+                size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
+                source: root._left_icon
+    Label:
+        text: root.text
+        color: root.font_color
+        font_size: root.font_size
+    Widget:
+        size_hint_x: None
+        width: 0 if all([root.right_icon == '', root.left_icon == '']) else self.height
+        canvas:
+            Color:
+                rgb: root.font_color[:3]
+                a: 0 if root.right_icon == '' else 1
+            Rectangle:
+                pos: self.x, self.center_y-sp(root.font_size[:-2])/2
+                size: sp(root.font_size[:-2]), sp(root.font_size[:-2])
+                source: root._right_icon

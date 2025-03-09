@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
-import kivyui.widgets
-from kivyui.widgets import UDropDown
+
+from kivyui.widgets.dropdown import UDropDown
 
 KV = """
 BoxLayout:

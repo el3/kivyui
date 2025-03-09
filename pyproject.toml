@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kivyui"
+dynamic = ["version"]
+dependencies = [
+  "kivy>=2.3.0",
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "el3", email = "youremail@example.com"},
+  {name = "Kartavya Shukla", email = "novfensec@protonmail.com"},
+]
+maintainers = [
+  {name = "el3", email = "youremail@example.com"},
+  {name = "Kartavya Shukla", email = "novfensec@protonmail.com"},
+]
+description = "A library providing Nuxt-UI components for Kivy."
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["Kivy", "Open Source", "Software Development", "NuxtUI", "KivyUI", "kv"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Multimedia :: Graphics",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/el3/KivyUI"
+Repository = "https://github.com/el3/KivyUI"
+"Bug Tracker" = "https://github.com/el3/KivyUI/issues"
+Changelog = "https://github.com/el3/KivyUI/blob/main/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "kivyui.__version__"}
+
+[tool.setuptools]
+package-dir = {"kivyui" = "kivyui"}
+
+[tool.setuptools.package-data]
+"kivyui" = [
+  "**/*.kv",
+  "**/*.png",
+]
+
+[tool.setuptools.exclude-package-data]
+"kivyui" = ["*.pyc", "*.pyo"]

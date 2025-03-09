@@ -1,0 +1,38 @@
+<UDropDown>:
+    left_icon: 'material-symbols--keyboard-arrow-down.png'
+    text: root.text
+    color: 'stone'
+    variant: 'outline'
+
+
+<UBoxLayout>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: .7,.7,.7,1
+        Line:
+            points: self.x+10, self.y, self.x+self.width-10, self.y   
+
+<UDropDownWidget>:
+    canvas.before:
+        Color:
+            rgba: .1,.2,.3, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(10.0, 10.0), (10.0, 10.0), (10.0, 10.0), (10.0, 10.0)]
+        Color:
+            rgba: .7,.7,.7,1
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10, 10, 10, 10, 100)    
+
+    background: ''
+    background_color: 0,0,0,0
+    
+<UDropDownLabel>:
+    size_hint_y: None
+    text_size: root.width, None
+    height: self.texture_size[1]+20
+    halign: 'left'
+    valign: 'middle'
+    padding: [40, 0, 0, 0]
